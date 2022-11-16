@@ -1,4 +1,4 @@
-const { getDayData, addEvent, setEvents, getAnalytics} = require('./lib/controllers');
+const { getEvents, addEvent, setEvents, getAnalytics, getDayData} = require('./lib/controllers');
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,12 +26,18 @@ MongoClient.connect(url, function(err, db) {
     app.use(cors())
 
     app.get('/', (req, res) => res.send('Hello World!'))
-    app.get('/dayData/:date/events', function(req, res) {
+
+    app.get('/dayData', function (req, res){
         getDayData(dbo, req, res)
+    })
+
+    app.get('/dayData/:date/events', function(req, res) {
+        getEvents(dbo, req, res)
     })
     app.post('/dayData/:date/events', function(req, res) {
         setEvents(dbo, req, res)
     })
+
     app.get('/analytics', function (req, res) {
         getAnalytics(dbo, req, res)
     })
