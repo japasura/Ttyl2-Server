@@ -1,4 +1,4 @@
-const { getDayData, addEvent, setEvents} = require('./lib/controllers');
+const { getDayData, addEvent, setEvents, getAnalytics} = require('./lib/controllers');
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -28,6 +28,9 @@ MongoClient.connect(url, function(err, db) {
     })
     app.post('/dayData/:date/events', function(req, res) {
         setEvents(dbo, req, res)
+    })
+    app.get('/analytics', function (req, res) {
+        getAnalytics(dbo, req, res)
     })
 
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
