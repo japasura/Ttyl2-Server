@@ -42,6 +42,10 @@ MongoClient.connect(url, function(err, db) {
         getAnalytics(dbo, req, res)
     })
 
+    app.get('/token', function (req, res) {
+        
+    })
+
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 });
