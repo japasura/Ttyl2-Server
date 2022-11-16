@@ -1,6 +1,11 @@
 .idea/
 .editorconfig
 
+/lib/test.js
+/lib/db_conn.js
+/lib/code_dump.js
+
+
 ### Node ###
 # Logs
 logs
