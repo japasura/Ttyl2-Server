@@ -9,18 +9,17 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const logger = require('morgan');
 const cors = require('cors');
+const {addToken, createUser, login} = require("./lib/auth");
 
 
 //Mongo DB Connect part
 MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     const dbo = db.db("Ttyl2");
-//----------------------------
-
+//---------------------------
     const app = express()
-    const port = 3000
+    const port = 8080
     app.use(logger("dev"))
-
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(cors())
@@ -43,7 +42,16 @@ MongoClient.connect(url, function(err, db) {
     })
 
     app.get('/token', function (req, res) {
-        
+        const token = addToken()
+        res.status(200).send(JSON.stringify({token: token}))
+    })
+
+    app.post("/user", (req, res) => {
+        createUser(req, res, dbo)
+    })
+
+    app.post("/login", (req, res) => {
+        login(req, res, dbo)
     })
 
     app.listen(port, () => console.log(`Example app listening on port ${port}!`))
