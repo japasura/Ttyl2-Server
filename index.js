@@ -18,7 +18,7 @@ MongoClient.connect(url, function(err, db) {
     const dbo = db.db("Ttyl2");
 //---------------------------
     const app = express()
-    const port = 8080
+    const port = 80
     app.use(logger("dev"))
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: true}))
