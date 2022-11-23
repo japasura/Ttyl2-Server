@@ -37,7 +37,7 @@ MongoClient.connect(url, function(err, db) {
         setEvents(dbo, req, res)
     })
 
-    app.get('/analytics', function (req, res) {
+    app.post('/analytics', function (req, res) {
         getAnalytics(dbo, req, res)
     })
 
